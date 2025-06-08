@@ -12,7 +12,9 @@ interface RecordCreationAttrs {
 })
 export class Record extends Model<Record, RecordCreationAttrs> {
   @ForeignKey(() => User)
-  @Column({type: DataType.INTEGER, allowNull: false})
+  @Column({type: DataType.INTEGER, allowNull: false,
+    references: {model: 'users', key: 'userId'}
+  })
   userId: number;
 
   @Column({type: DataType.STRING, allowNull: false})
