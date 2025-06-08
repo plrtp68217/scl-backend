@@ -3,6 +3,7 @@ import { Record } from "src/records/records.model";
 
 interface UserCreationAttrs {
   userId: number,
+  name: string,
 }
 
 @Table({
