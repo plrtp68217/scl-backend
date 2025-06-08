@@ -5,6 +5,7 @@ import { ConfigModule } from "@nestjs/config";
 
 import { User } from "./users/users.model";
 import { RecordsModule } from './records/records.module';
+import { Record } from "./records/records.model";
 
 @Module({
   controllers: [],
@@ -20,7 +21,7 @@ import { RecordsModule } from './records/records.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [User, Record],
       autoLoadModels: true,
     }),
     UsersModule,

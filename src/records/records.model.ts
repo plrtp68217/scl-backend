@@ -1,5 +1,4 @@
-import { Model } from "sequelize";
-import { BelongsTo, Column, DataType, ForeignKey, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Table, Model } from "sequelize-typescript";
 import { User } from "src/users/users.model";
 
 @Table({

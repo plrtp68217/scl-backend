@@ -1,5 +1,4 @@
-import { Model } from "sequelize";
-import { Column, DataType, HasMany, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Table, Model } from "sequelize-typescript";
 import { Record } from "src/records/records.model";
 
 interface UserCreationAttrs {
@@ -11,9 +10,6 @@ interface UserCreationAttrs {
   timestamps: false,
 })
 export class User extends Model<User, UserCreationAttrs> {
-  @Column
-  id: number;
-
   @Column({type: DataType.INTEGER, unique: true})
   userId: number;
 
