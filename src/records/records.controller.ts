@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { RecordsService } from './records.service';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateOptions } from 'sequelize';
@@ -18,7 +18,7 @@ export class RecordsController {
     return this.recordsService.createRecord(dto);
   }
 
-  @Post()
+  @Put()
   update(@Body() dto: UpdateRecordDto) {
     return this.recordsService.updateRecord(dto);
   }
