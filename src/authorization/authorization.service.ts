@@ -8,11 +8,11 @@ export class AuthorizationService {
     private usersService: UsersService
   ) {}
 
-  loginUser(dto: LoginUserDto) {
-    let user = this.usersService.getUser(dto.userId);
+  async loginUser(dto: LoginUserDto) {
+    let user = await this.usersService.getUser(dto.userId);
     
     if (!user) {
-      user = this.usersService.createUser(dto)
+      user = await this.usersService.createUser(dto)
     }
 
     return user;
