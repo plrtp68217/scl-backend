@@ -6,6 +6,7 @@ import { ConfigModule } from "@nestjs/config";
 import { User } from "./users/users.model";
 import { RecordsModule } from './records/records.module';
 import { Record } from "./records/records.model";
+import { AuthorizationModule } from './authorization/authorization.module';
 
 @Module({
   controllers: [],
@@ -26,6 +27,7 @@ import { Record } from "./records/records.model";
     }),
     UsersModule,
     RecordsModule,
+    AuthorizationModule,
   ],
 })
 export class AppModule {
