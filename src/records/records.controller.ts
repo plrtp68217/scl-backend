@@ -9,7 +9,7 @@ export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
   @Get('/:userId/:gameId')
-  get(@Param('userId') userId: number, @Param('gameId') gameId: string): Promise<Record> {
+  get(@Param('userId') userId: number, @Param('gameId') gameId: string): Promise<Record | null> {
     return this.recordsService.getRecord(userId, gameId);
   }
 

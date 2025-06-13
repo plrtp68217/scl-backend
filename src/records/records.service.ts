@@ -13,17 +13,13 @@ export class RecordsService {
       private recordModel: typeof Record,
   ) {}
 
-  async getRecord(userId: number, gameId: string): Promise<Record> {
+  async getRecord(userId: number, gameId: string): Promise<Record | null> {
     let record = await this.recordModel.findOne({
       where: {
         userId,
         gameId,
       }
     });
-
-    if (!record) {
-      throw new NotFoundException('Record not found');
-    }
 
     return record;
   }
@@ -36,13 +32,8 @@ export class RecordsService {
 
   async updateRecord(dto: UpdateRecordDto): Promise<Record> {
     let record = await this.getRecord(dto.userId, dto.gameId);
+    await record!.update(dto);
 
-    if (!record) {
-    throw new NotFoundException('Record not found');
-    }
-
-    await record.update(dto);
-
-    return record;
+    return record!;
   }
 }
