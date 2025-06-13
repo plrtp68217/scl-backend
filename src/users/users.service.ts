@@ -11,16 +11,12 @@ export class UsersService {
     private userModel: typeof User,
   ) {}
 
-  async getUser(userId: number): Promise<User> {
+  async getUser(userId: number): Promise<User | null> {
     let user = await this.userModel.findOne({
       where: {
         userId
       }
     });
-
-    if (!user) {
-      throw new NotFoundException('User not found')
-    }
 
     return user;
   }
@@ -33,8 +29,8 @@ export class UsersService {
 
   async updateUser(dto: UpdateUserDto): Promise<User> {
     let user = await this.getUser(dto.userId);
-    user?.update(dto);
-
-    return user;
+    user!.update(dto);
+    
+    return user!;
   }
 }

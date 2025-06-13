@@ -15,14 +15,14 @@ export class Record extends Model<Record, RecordCreationAttrs> {
   @Column({type: DataType.INTEGER, allowNull: false,
     references: {model: 'users', key: 'userId'}
   })
-  userId: number;
+  declare userId: number;
 
   @Column({type: DataType.STRING, allowNull: false})
-  gameId: string;
+  declare gameId: string;
 
   @Column({type: DataType.INTEGER, defaultValue: 0})
-  score: number;
+  declare score: number;
 
   @BelongsTo(() => User)
-  user: User;
+  declare user: User;
 }

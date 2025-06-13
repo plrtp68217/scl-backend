@@ -7,7 +7,8 @@ async function start() {
 
   app.enableCors({
   origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: 'GET,PUT,POST',
+  credentials: true,
 });
 
   await app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

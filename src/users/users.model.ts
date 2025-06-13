@@ -12,14 +12,14 @@ interface UserCreationAttrs {
 })
 export class User extends Model<User, UserCreationAttrs> {
   @Column({type: DataType.INTEGER, unique: true, allowNull: false})
-  userId: number;
+  declare userId: number;
 
   @Column({type: DataType.STRING, allowNull: false})
-  name: string;
+  declare name: string;
 
   @Column({type: DataType.INTEGER, defaultValue: 0})
-  balance: number;
+  declare balance: number;
 
   @HasMany(() => Record)
-  records: Record[];
+  declare records: Record[];
 }

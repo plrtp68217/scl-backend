@@ -11,9 +11,9 @@ export class AuthorizationService {
 
   async loginUser(dto: LoginUserDto): Promise<User> {
     let user = await this.usersService.getUser(dto.userId);
-    
+
     if (!user) {
-      user = await this.usersService.createUser(dto)
+      user = await this.usersService.createUser(dto);
     }
 
     return user;
