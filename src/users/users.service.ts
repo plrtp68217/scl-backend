@@ -33,7 +33,6 @@ export class UsersService {
 
   async updateUser(dto: UpdateUserDto): Promise<User> {
     let user = await this.getUser(dto.userId);
-
     user?.update(dto);
 
     return user;
