@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
 import { Record } from './records.model';
@@ -13,7 +13,7 @@ export class RecordsService {
       private recordModel: typeof Record,
   ) {}
 
-  async getRecord(userId: number, gameId: string) {
+  async getRecord(userId: number, gameId: string): Promise<Record> {
     let record = await this.recordModel.findOne({
       where: {
         userId,
@@ -21,19 +21,27 @@ export class RecordsService {
       }
     });
 
+    if (!record) {
+      throw new NotFoundException('Record not found');
+    }
+
     return record;
   }
 
-  async createRecord(dto: CreateRecordDto) {
+  async createRecord(dto: CreateRecordDto): Promise<Record> {
     let record = await this.recordModel.create(dto);
 
     return record;
   }
 
-  async updateRecord(dto: UpdateRecordDto) {
+  async updateRecord(dto: UpdateRecordDto): Promise<Record> {
     let record = await this.getRecord(dto.userId, dto.gameId);
 
-    record?.update(dto);
+    if (!record) {
+    throw new NotFoundException('Record not found');
+    }
+
+    await record.update(dto);
 
     return record;
   }

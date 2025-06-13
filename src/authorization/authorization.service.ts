@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { LoginUserDto } from './dto/login-user.dto';
+import { User } from 'src/users/users.model';
 
 @Injectable()
 export class AuthorizationService {
@@ -8,7 +9,7 @@ export class AuthorizationService {
     private usersService: UsersService
   ) {}
 
-  async loginUser(dto: LoginUserDto) {
+  async loginUser(dto: LoginUserDto): Promise<User> {
     let user = await this.usersService.getUser(dto.userId);
     
     if (!user) {
