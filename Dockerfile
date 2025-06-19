@@ -8,8 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Устанавливаем зависимости (включая devDependencies для сборки)
-RUN npm install -g @nestjs/cli && \
-    npm install
+RUN npm install
 
 # Копируем все файлы проекта
 COPY . .
