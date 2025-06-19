@@ -1,9 +1,6 @@
 # Базовый образ для сборки
 FROM node:18-alpine AS builder
 
-# Установка зависимых пакетов (необходимых для сборки)
-RUN apk add --no-cache git python3 make g++
-
 # Рабочая директория
 WORKDIR /app
 
@@ -11,16 +8,14 @@ WORKDIR /app
 COPY package*.json ./
 
 # Устанавливаем зависимости (включая devDependencies для сборки)
-RUN npm ci
+RUN npm install -g @nestjs/cli && \
+    npm install
 
 # Копируем все файлы проекта
 COPY . .
 
 # Собираем приложение
 RUN npm run build
-
-# Удаляем devDependencies после сборки
-RUN npm prune --production
 
 # Финальный образ
 FROM node:18-alpine
