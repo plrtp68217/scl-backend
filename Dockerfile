@@ -1,5 +1,5 @@
 # Базовый образ для сборки
-FROM node:18-alpine AS builder
+FROM node:18-slim AS builder
 
 # Рабочая директория
 WORKDIR /app
