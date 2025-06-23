@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ActionsService } from './actions.service';
 
 @Controller('actions')
@@ -7,6 +7,27 @@ export class ActionsController {
 
   @Get('/summary')
   getSummary() {
-    return {'actions': 12, 'entrys': 80};
+    return this.actionsService.getSummary();
+  }
+
+  @Get('/summary/:date_start/:date_end')
+  getSummaryInterval(
+    @Param('date_start') date_start: Date,
+    @Param('date_end') date_end: Date) 
+  {
+    return this.actionsService.getSummaryInterval(date_start, date_end);
+  }
+
+  @Get('/game/:gameId')
+  getGameActivity(@Param('gameId') gameId: string) {
+  }
+
+  @Get('/game/:gameId/:date_start/:date_end')
+  getGameActivityInterval(
+    @Param('gameId') gameId: string,
+    @Param('date_start') date_start: Date,
+    @Param('date_end') date_end: Date) 
+  {
+
   }
 }

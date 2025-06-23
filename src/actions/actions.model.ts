@@ -7,7 +7,7 @@ interface ActionCreationAttrs {
 }
 
 @Table({
-  tableName: 'action',
+  tableName: 'actions',
   timestamps: false,
 })
 export class Action extends Model<Action, ActionCreationAttrs> {
