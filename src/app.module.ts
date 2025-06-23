@@ -7,6 +7,7 @@ import { User } from "./users/users.model";
 import { RecordsModule } from './records/records.module';
 import { Record } from "./records/records.model";
 import { AuthorizationModule } from './authorization/authorization.module';
+import { ActionsModule } from './actions/actions.module';
 
 @Module({
   controllers: [],
@@ -28,6 +29,7 @@ import { AuthorizationModule } from './authorization/authorization.module';
     UsersModule,
     RecordsModule,
     AuthorizationModule,
+    ActionsModule,
   ],
 })
 export class AppModule {
