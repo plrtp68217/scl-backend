@@ -20,6 +20,7 @@ export class ActionsController {
 
   @Get('/game/:gameId')
   getGameActivity(@Param('gameId') gameId: string) {
+    return this.actionsService.getGameActivity(gameId);
   }
 
   @Get('/game/:gameId/:date_start/:date_end')
@@ -28,6 +29,6 @@ export class ActionsController {
     @Param('date_start') date_start: Date,
     @Param('date_end') date_end: Date) 
   {
-
+    return this.actionsService.getGameActivityInterval(gameId, date_start, date_end);
   }
 }
