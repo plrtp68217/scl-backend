@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ActionsService } from './actions.service';
+import { CreateActionDto } from './dto/create-action.dto';
 
 @Controller('actions')
 export class ActionsController {
@@ -18,17 +19,22 @@ export class ActionsController {
     return this.actionsService.getSummaryInterval(date_start, date_end);
   }
 
-  @Get('/game/:gameId')
-  getGameActivity(@Param('gameId') gameId: string) {
-    return this.actionsService.getGameActivity(gameId);
+  @Get('/game/:action')
+  getGameActivity(@Param('action') action: string) {
+    return this.actionsService.getGameActivity(action);
   }
 
-  @Get('/game/:gameId/:date_start/:date_end')
+  @Get('/game/:action/:date_start/:date_end')
   getGameActivityInterval(
-    @Param('gameId') gameId: string,
+    @Param('action') action: string,
     @Param('date_start') date_start: Date,
     @Param('date_end') date_end: Date) 
   {
-    return this.actionsService.getGameActivityInterval(gameId, date_start, date_end);
+    return this.actionsService.getGameActivityInterval(action, date_start, date_end);
+  }
+
+  @Post()
+  createAction(@Body() dto: CreateActionDto) {
+    return this.actionsService.createAction(dto);
   }
 }

@@ -3,7 +3,6 @@ import { Model, Column, DataType, Table } from "sequelize-typescript";
 interface ActionCreationAttrs {
   name: string,
   action: string,
-  date: Date
 }
 
 @Table({
@@ -17,6 +16,6 @@ export class Action extends Model<Action, ActionCreationAttrs> {
   @Column({type: DataType.STRING, allowNull: false})
   declare action: string;
 
-  @Column({type: DataType.DATE, allowNull: false})
+  @Column({type: DataType.DATE, defaultValue: DataType.NOW})
   declare date: Date;
 }

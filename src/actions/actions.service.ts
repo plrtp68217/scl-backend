@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { Action } from './actions.model';
+import { CreateActionDto } from './dto/create-action.dto';
 
 @Injectable()
 export class ActionsService {
@@ -64,20 +65,20 @@ export class ActionsService {
     return summaryInterval;
   }
 
-  async getGameActivity(gameId: string) {
+  async getGameActivity(action: string) {
     const gameActivity = await this.actionModel.count({
       where: {
-        action: gameId
+        action,
       }
     });
 
     return {gameActivity: gameActivity || 'Not Found'};
   }
 
-  async getGameActivityInterval(gameId: string, date_start: Date, date_end: Date) {
+  async getGameActivityInterval(action: string, date_start: Date, date_end: Date) {
     const gameActivityInterval = await this.actionModel.count({
       where: {
-        action: gameId,
+        action,
         date: {
           [Op.gte]: date_start,
           [Op.lte]: date_end,
@@ -86,5 +87,10 @@ export class ActionsService {
     });
 
     return {gameActivityInterval: gameActivityInterval || 'Not Found'};
+  }
+
+  async createAction(dto: CreateActionDto) {
+    const action = await this.actionModel.create(dto);
+    return action;
   }
 }
