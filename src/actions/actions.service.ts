@@ -3,6 +3,9 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { Action } from './actions.model';
 import { CreateActionDto } from './dto/create-action.dto';
+import { ISummary } from './interfaces/ISummary';
+import { ISummaryInterval } from './interfaces/ISummaryInterval';
+import { IGameActivity } from './interfaces/IGameActivity';
 
 @Injectable()
 export class ActionsService {
@@ -11,7 +14,7 @@ export class ActionsService {
     private actionModel: typeof Action
   ) {}
 
-  async getSummary() {
+  async getSummary(): Promise<ISummary> {
     const entrysCount = await this.actionModel.count({
       where: {
         action: 'entry',
@@ -34,7 +37,7 @@ export class ActionsService {
     return summary;
   }
 
-  async getSummaryInterval(date_start: Date, date_end: Date) {
+  async getSummaryInterval(date_start: Date, date_end: Date): Promise<ISummaryInterval> {
     const entrysCountInterval = await this.actionModel.count({
       where: {
         action: 'entry',
@@ -65,7 +68,7 @@ export class ActionsService {
     return summaryInterval;
   }
 
-  async getGameActivity(action: string) {
+  async getGameActivity(action: string): Promise<IGameActivity> {
     const gameActivity = await this.actionModel.count({
       where: {
         action,
@@ -89,7 +92,7 @@ export class ActionsService {
     return {gameActivityInterval: gameActivityInterval || 'Not Found'};
   }
 
-  async createAction(dto: CreateActionDto) {
+  async createAction(dto: CreateActionDto): Promise<Action> {
     const action = await this.actionModel.create(dto);
     return action;
   }
