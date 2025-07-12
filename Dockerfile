@@ -1,15 +1,3 @@
-# FROM node:18-alpine AS builder
-
-# WORKDIR /app
-
-# COPY package*.json ./
-# RUN npm install
-
-# COPY ./dist ./dist
-
-# CMD ["node", "dist/main.js"]
-
-# Этап сборки
 FROM node:18-alpine AS builder
 
 WORKDIR /app
@@ -18,6 +6,7 @@ COPY package*.json ./
 COPY nest-cli.json ./
 
 RUN npm install
+RUN npm install -g @nestjs/cli
 
 COPY . .
 
