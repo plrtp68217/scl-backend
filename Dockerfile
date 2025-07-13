@@ -6,7 +6,7 @@ COPY package*.json ./
 COPY nest-cli.json ./
 
 RUN npm install
-RUN npm install -g @nestjs/cli
+RUN npm install --save-dev @nestjs/cli
 
 COPY . .
 
