@@ -6,6 +6,8 @@ import { Record } from './records.model';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { CreateRecordDto } from './dto/create-record.dto';
 
+import { User } from 'src/users/users.model';
+
 @Injectable()
 export class RecordsService {
   constructor(
@@ -22,6 +24,25 @@ export class RecordsService {
     });
 
     return record;
+  }
+
+  async getBestRecords(gameId: string): Promise<Record[] | null> {
+    let records = await this.recordModel.findAll({
+      where: {
+        gameId
+      },
+      order: [
+        ['score', 'DESC']
+      ],
+      limit: 100,
+      include: [{
+        model: User,
+        attributes: ['name'],
+        required: false,
+      }],
+    })
+
+    return records;
   }
 
   async createRecord(dto: CreateRecordDto): Promise<Record> {

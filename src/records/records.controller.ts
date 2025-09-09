@@ -13,6 +13,11 @@ export class RecordsController {
     return this.recordsService.getRecord(userId, gameId);
   }
 
+  @Get('/:gameId')
+  getBestRecords(@Param('gameId') gameId: string): Promise<Record[] | null> {
+    return this.recordsService.getBestRecords(gameId);
+  }
+
   @Post()
   create(@Body() dto: CreateRecordDto): Promise<Record>  {
     return this.recordsService.createRecord(dto);
