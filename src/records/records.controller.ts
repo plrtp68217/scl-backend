@@ -8,12 +8,12 @@ import { Record } from './records.model';
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
-  @Get('/game/:gameId')
+  @Get('game/:gameId')
   getBestRecords(@Param('gameId') gameId: string): Promise<Record[] | null> {
     return this.recordsService.getBestRecords(gameId);
   }
 
-  @Get('/user/:userId/:gameId')
+  @Get('user/:userId/:gameId')
   get(@Param('userId') userId: number, @Param('gameId') gameId: string): Promise<Record | null> {
     return this.recordsService.getRecord(userId, gameId);
   }
