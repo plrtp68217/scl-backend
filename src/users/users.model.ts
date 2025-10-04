@@ -11,7 +11,7 @@ interface UserCreationAttrs {
   timestamps: false,
 })
 export class User extends Model<User, UserCreationAttrs> {
-  @Column({type: DataType.INTEGER, primaryKey: true, autoIncrement: false})
+  @Column({type: DataType.BIGINT, primaryKey: true, autoIncrement: false})
   declare userId: number;
 
   @Column({type: DataType.STRING, allowNull: false})
