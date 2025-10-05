@@ -1,2 +1,5 @@
 ALTER TABLE "users"
 ALTER COLUMN "userId" TYPE bigint USING "userId"::bigint;
+
+ALTER TABLE "records"
+ALTER COLUMN "userId" TYPE bigint USING "userId"::bigint;
