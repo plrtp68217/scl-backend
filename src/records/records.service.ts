@@ -5,6 +5,7 @@ import { Record } from './records.model';
 
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { CreateRecordDto } from './dto/create-record.dto';
+import { RecordResponseDto } from './dto/record-response.dto';
 
 import { User } from 'src/users/users.model';
 
@@ -26,7 +27,7 @@ export class RecordsService {
     return record;
   }
 
-  async getBestRecords(gameId: string): Promise<Record[] | null> {
+  async getBestRecords(gameId: string): Promise<RecordResponseDto[] | null> {
     let records = await this.recordModel.findAll({
       where: {
         gameId
@@ -42,7 +43,7 @@ export class RecordsService {
       }],
     })
 
-    return records;
+    return records.map(record => new RecordResponseDto(record));
   }
 
   async createRecord(dto: CreateRecordDto): Promise<Record> {
