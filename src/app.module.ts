@@ -8,6 +8,10 @@ import { RecordsModule } from './records/records.module';
 import { Record } from "./records/records.model";
 import { AuthorizationModule } from './authorization/authorization.module';
 import { ActionsModule } from './actions/actions.module';
+import { ChannelsModule } from './channels/channels.module';
+import { Action } from "./actions/actions.model";
+import { Channel } from "./channels/channels.model";
+import { UserChannel } from "./channels/users-channels.model";
 
 @Module({
   controllers: [],
@@ -23,13 +27,14 @@ import { ActionsModule } from './actions/actions.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Record],
+      models: [User, Record, Action, Channel, UserChannel],
       autoLoadModels: true,
     }),
     UsersModule,
     RecordsModule,
     AuthorizationModule,
     ActionsModule,
+    ChannelsModule,
   ],
 })
 export class AppModule {
