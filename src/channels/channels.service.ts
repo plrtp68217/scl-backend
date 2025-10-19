@@ -7,6 +7,7 @@ import { CreateChannelDto } from './dto/create-channel.dto';
 import { UpdateChannelDto } from './dto/update-channel.dto';
 import { CreateUserChannelDto } from './dto/create-user-channel.dto';
 import { UsersService } from 'src/users/users.service';
+import { DeleteChannelDto } from './dto/delete-channel.dto';
 
 @Injectable()
 export class ChannelsService {
@@ -48,6 +49,13 @@ export class ChannelsService {
     return channel;
   }
 
+  async deleteChannel(dto: DeleteChannelDto) {
+    const channel = await this.getChannel(dto.channelId); 
+    await channel?.destroy();
+    return true;
+  }
+
+  // СОЗДАЕМ ПОДПИСКУ ИГРОКУ НА КАНАЛ
   async createUserChannel(dto: CreateUserChannelDto) {
     const user = this.usersService.getUser(dto.userId);
 
@@ -66,23 +74,24 @@ export class ChannelsService {
     return userChannel;
   }
 
-  async getChannelsWithoutUser(userId: number) {
-    const channelsWithUser = await this.userChannelModel.findAll({
+  // ОТДАЕМ КАНАЛЫ, НА КОТОРЫЕ ИГРОК НЕ ПОДПИСАЛСЯ
+  async getUserChannelsWithoutSubscribe(userId: number) {
+    const userChannelsWithSubscribe = await this.userChannelModel.findAll({
       where: { userId },
       attributes: ['channelId']
     });
 
-    const channelsIdWithUser = channelsWithUser.map(channel => channel.channelId);
+    const userChannelsIdsWithSubscribe = userChannelsWithSubscribe.map(channel => channel.channelId);
 
-    const channlesWithoutUser = await this.channelModel.findAll({
+    const userChannelsWithoutSubscribe = await this.channelModel.findAll({
       where: {
         channelId: {
-          [Op.notIn]: channelsIdWithUser
+          [Op.notIn]: userChannelsIdsWithSubscribe
         }
       }
     });
 
-    return channlesWithoutUser;
+    return userChannelsWithoutSubscribe;
   }
 
 }
