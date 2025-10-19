@@ -20,6 +20,9 @@ export class Channel extends Model<Channel, ChannelCreationAttrs> {
   @Column({type: DataType.STRING, allowNull: false})
   declare channelId: string
 
+  @Column({type: DataType.INTEGER, allowNull: true})
+  declare reward: number;
+
   @Column({type: DataType.STRING, allowNull: true})
   declare title: string;
 
