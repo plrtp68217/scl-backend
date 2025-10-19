@@ -1,4 +1,4 @@
-export class UpdateChannelDto {
+export interface UpdateChannelDto {
   channelId: string
   title: string;
 }
