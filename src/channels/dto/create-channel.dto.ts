@@ -1,4 +1,4 @@
 export interface CreateChannelDto {
-  readonly channelId: string;
-  readonly title: string;
+  channelId: string;
+  title: string;
 }
