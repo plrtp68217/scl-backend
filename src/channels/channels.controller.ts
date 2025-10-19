@@ -9,6 +9,11 @@ import { UpdateChannelDto } from './dto/update-channel.dto';
 export class ChannelsController {
   constructor(private channelsService: ChannelsService) {}
 
+  @Get('all')
+  getAllChannels() {
+      return this.channelsService.getAllChannels();
+  }
+
   @Get(':userId')
   getChannels(@Param('userId') userId: number) {
       return this.channelsService.getUserChannelsWithoutSubscribe(userId);
