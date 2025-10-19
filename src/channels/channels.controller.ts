@@ -9,6 +9,16 @@ import { UpdateChannelDto } from './dto/update-channel.dto';
 export class ChannelsController {
   constructor(private channelsService: ChannelsService) {}
 
+  @Get(':userId')
+  getChannels(@Param('userId') userId: number) {
+      return this.channelsService.getUserChannelsWithoutSubscribe(userId);
+  }
+
+  @Post('subscribe')
+  createSubscribe(@Body() dto: CreateUserChannelDto)  {
+    return this.channelsService.createUserChannel(dto);
+  }
+
   @Post('create')
   createChannel(@Body() dto: CreateChannelDto)  {
     return this.channelsService.createChannel(dto);
@@ -22,15 +32,5 @@ export class ChannelsController {
   @Post('delete')
   deleteChannel(@Body() dto: DeleteChannelDto)  {
     return this.channelsService.deleteChannel(dto);
-  }
-
-  @Get(':userId')
-  getChannels(@Param('userId') userId: number) {
-      return this.channelsService.getUserChannelsWithoutSubscribe(userId);
-  }
-
-  @Post('subscribe')
-  createSubscribe(@Body() dto: CreateUserChannelDto)  {
-    return this.channelsService.createUserChannel(dto);
   }
 }
