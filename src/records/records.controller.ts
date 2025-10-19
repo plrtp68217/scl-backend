@@ -9,11 +9,6 @@ import { Record } from './records.model';
 export class RecordsController {
   constructor(private recordsService: RecordsService) {}
 
-  @Get('test')
-  getTest(): string {
-    return  'test endpoint';
-  }
-
   @Get('game/:gameId')
   getBestRecords(@Param('gameId') gameId: string): Promise<RecordResponseDto[] | null> {
     return this.recordsService.getBestRecords(gameId);
@@ -23,7 +18,6 @@ export class RecordsController {
   get(@Param('userId') userId: number, @Param('gameId') gameId: string): Promise<Record | null> {
     return this.recordsService.getRecord(userId, gameId);
   }
-
 
   @Post()
   create(@Body() dto: CreateRecordDto): Promise<Record>  {
