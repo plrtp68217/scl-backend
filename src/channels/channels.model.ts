@@ -26,6 +26,9 @@ export class Channel extends Model<Channel, ChannelCreationAttrs> {
   @Column({type: DataType.STRING, allowNull: true})
   declare title: string;
 
+  @Column({type: DataType.STRING, allowNull: true})
+  declare description: string;
+
   @BelongsToMany(() => User, () => UserChannel)
   declare users: User[];
 }
