@@ -19,17 +19,17 @@ export class ChannelsService {
     private usersService: UsersService,
   ) {}
 
-  async createChannel(dto: CreateChannelDto) {
+  async createChannel(dto: CreateChannelDto): Promise<Channel> {
     const channel = await this.channelModel.create(dto);
     return channel;
   }
 
-  async getAllChannels() {
+  async getAllChannels(): Promise<Channel[]> {
     const channels = await this.channelModel.findAll();
     return channels;
   }
 
-  async getChannel(channelId: string) {
+  async getChannel(channelId: string): Promise<Channel> {
     const channel = await this.channelModel.findOne({
       where: {
         channelId,
@@ -43,20 +43,20 @@ export class ChannelsService {
     return channel;
   }
 
-  async updateChannel(dto: UpdateChannelDto) {
+  async updateChannel(dto: UpdateChannelDto): Promise<Channel> {
     const channel = await this.getChannel(dto.channelId);
     await channel?.update(dto);
     return channel;
   }
 
-  async deleteChannel(dto: DeleteChannelDto) {
+  async deleteChannel(dto: DeleteChannelDto): Promise<boolean> {
     const channel = await this.getChannel(dto.channelId); 
     await channel?.destroy();
     return true;
   }
 
   // СОЗДАЕМ ПОДПИСКУ ИГРОКУ НА КАНАЛ
-  async createUserChannel(dto: CreateUserChannelDto) {
+  async createUserChannel(dto: CreateUserChannelDto): Promise<UserChannel> {
     const user = this.usersService.getUser(dto.userId);
 
     if (!user) {
@@ -75,7 +75,7 @@ export class ChannelsService {
   }
 
   // ОТДАЕМ КАНАЛЫ, НА КОТОРЫЕ ИГРОК НЕ ПОДПИСАЛСЯ
-  async getUserChannelsWithoutSubscribe(userId: number) {
+  async getUserChannelsWithoutSubscribe(userId: number): Promise<Channel[]> {
     const userChannelsWithSubscribe = await this.userChannelModel.findAll({
       where: { userId },
       attributes: ['channelId']

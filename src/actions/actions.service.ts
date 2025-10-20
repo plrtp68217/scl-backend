@@ -6,6 +6,7 @@ import { CreateActionDto } from './dto/create-action.dto';
 import { ISummary } from './interfaces/ISummary';
 import { ISummaryInterval } from './interfaces/ISummaryInterval';
 import { IGameActivity } from './interfaces/IGameActivity';
+import { IGameActivityInterval } from './interfaces/IGameActivityInterval';
 
 @Injectable()
 export class ActionsService {
@@ -78,7 +79,7 @@ export class ActionsService {
     return {gameActivity: gameActivity || 'Not Found'};
   }
 
-  async getGameActivityInterval(action: string, date_start: Date, date_end: Date) {
+  async getGameActivityInterval(action: string, date_start: Date, date_end: Date): Promise<IGameActivityInterval> {
     const gameActivityInterval = await this.actionModel.count({
       where: {
         action,
