@@ -5,7 +5,7 @@ import { Channel } from './channels.model';
 
 interface UserChannelCreationAttrs {
   userId: number;
-  channelId: string;
+  channelId: number;
   subscribedAt?: Date;
 }
 
@@ -15,12 +15,12 @@ interface UserChannelCreationAttrs {
 })
 export class UserChannel extends Model<UserChannel, UserChannelCreationAttrs> {
   @ForeignKey(() => User)
-  @Column({type: DataType.INTEGER, allowNull: false})
+  @Column({type: DataType.BIGINT, allowNull: false})
   declare userId: number;
 
   @ForeignKey(() => Channel)
-  @Column({type: DataType.STRING, allowNull: false})
-  declare channelId: string;
+  @Column({type: DataType.INTEGER, allowNull: false})
+  declare channelId: number; // ← ссылается на Channel.id
 
   @Column({type: DataType.DATE, defaultValue: DataType.NOW})
   declare subscribedAt: Date;

@@ -29,12 +29,8 @@ export class ChannelsService {
     return channels;
   }
 
-  async getChannel(channelId: string): Promise<Channel> {
-    const channel = await this.channelModel.findOne({
-      where: {
-        channelId,
-      }
-    })
+  async getChannel(channelId: number): Promise<Channel> {
+    const channel = await this.channelModel.findByPk(channelId)
 
     if (!channel) {
       throw new Error('channel not found'); 
@@ -44,13 +40,13 @@ export class ChannelsService {
   }
 
   async updateChannel(dto: UpdateChannelDto): Promise<Channel> {
-    const channel = await this.getChannel(dto.channelId);
+    const channel = await this.getChannel(dto.id);
     await channel?.update(dto);
     return channel;
   }
 
   async deleteChannel(dto: DeleteChannelDto): Promise<boolean> {
-    const channel = await this.getChannel(dto.channelId); 
+    const channel = await this.getChannel(dto.id); 
     await channel?.destroy();
     return true;
   }
@@ -85,7 +81,7 @@ export class ChannelsService {
 
     const userChannelsWithoutSubscribe = await this.channelModel.findAll({
       where: {
-        channelId: {
+        id: {
           [Op.notIn]: userChannelsIdsWithSubscribe
         }
       }

@@ -1,4 +1,4 @@
 export interface CreateUserChannelDto {
   userId: number;
-  channelId: string;
+  channelId: number;
 }

@@ -1,3 +1,3 @@
 export interface DeleteChannelDto {
-  channelId: string
+  id: number;
 }

@@ -17,8 +17,12 @@ interface ChannelCreationAttrs {
   timestamps: false,
 })
 export class Channel extends Model<Channel, ChannelCreationAttrs> {
+
+  @Column({type: DataType.INTEGER, primaryKey: true, autoIncrement: true})
+  declare id: number;
+
   @Column({type: DataType.STRING, allowNull: false})
-  declare channelId: string
+  declare channelLink: string
 
   @Column({type: DataType.INTEGER, allowNull: true})
   declare reward: number;
