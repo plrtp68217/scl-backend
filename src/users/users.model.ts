@@ -2,12 +2,14 @@ import {
   Column,
   DataType,
   HasMany,
+  HasOne,
   BelongsToMany, 
   Table, 
   Model } from "sequelize-typescript";
 import { Record } from "src/records/records.model";
 import { Channel } from "src/channels/channels.model";
 import { UserChannel } from "src/channels/users-channels.model";
+import { Activity } from "src/activitys/activitys.model";
 
 interface UserCreationAttrs {
   userId: number,
@@ -33,4 +35,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsToMany(() => Channel, () => UserChannel)
   declare channels: Channel[];
+
+  @HasOne(() => Activity)
+  declare activity: Activity;
 }

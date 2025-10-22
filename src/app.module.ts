@@ -12,6 +12,8 @@ import { ChannelsModule } from './channels/channels.module';
 import { Action } from "./actions/actions.model";
 import { Channel } from "./channels/channels.model";
 import { UserChannel } from "./channels/users-channels.model";
+import { ActivitysModule } from './activitys/activitys.module';
+import { Activity } from "./activitys/activitys.model";
 
 @Module({
   controllers: [],
@@ -27,7 +29,7 @@ import { UserChannel } from "./channels/users-channels.model";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Record, Action, Channel, UserChannel],
+      models: [User, Record, Action, Channel, UserChannel, Activity],
       autoLoadModels: true,
     }),
     UsersModule,
@@ -35,6 +37,7 @@ import { UserChannel } from "./channels/users-channels.model";
     AuthorizationModule,
     ActionsModule,
     ChannelsModule,
+    ActivitysModule,
   ],
 })
 export class AppModule {
