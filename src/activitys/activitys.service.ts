@@ -98,7 +98,9 @@ export class ActivitysService {
     await activity.save();
 
     user.balance += activity.reward * activity.streak
-    await this.usersService.updateUser(user);
+    await this.usersService.updateUser(
+      {userId: user.userId, name: user.name, balance: user.balance}
+    );
 
     return user;
   }
