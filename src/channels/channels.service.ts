@@ -41,7 +41,7 @@ export class ChannelsService {
 
   async updateChannel(dto: UpdateChannelDto): Promise<Channel> {
     const channel = await this.getChannel(dto.id);
-    await channel?.update(dto);
+    await channel.update(dto);
     return channel;
   }
 
